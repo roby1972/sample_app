@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504123953) do
+ActiveRecord::Schema.define(version: 20170504132743) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "password_digest"
     t.string   "remember_digest"
     t.boolean  "admin"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170504123953) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.datetime "last_access_at",    default: '2001-01-01 00:00:00'
   end
 
 end

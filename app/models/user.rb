@@ -71,6 +71,11 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
   
+  # Update Last Access
+  def last_access
+    update_attribute(:last_access_at, Time.zone.now)
+  end  
+  
   private
     # Converts email to all lower-case.
     def downcase_email
