@@ -8,8 +8,8 @@ class UsersController < ApplicationController
     #@users = User.all
     #@users = User.paginate(page: params[:page])
     #@users = User.order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
-    @users = User.where(activated: true).order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
-    #@users = User.where(activated: true).paginate(page: params[:page])
+    #@users = User.where(activated: true).order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page], :per_page => 10)
     #user_sorted = User.sort_by(&:last_access_at)
     #@users = user_sorted.paginate(page: params[:page])
   end
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to root_url and return unless @user.activated?
+    @microposts = @user.microposts.paginate(page: params[:page], :per_page => 10)
     #debugger
   end
 
@@ -62,13 +63,13 @@ class UsersController < ApplicationController
     
     # Before filters
     # Confirms a logged-in user.
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end    
+    #def logged_in_user
+    #  unless logged_in?
+    #    store_location
+    #    flash[:danger] = "Please log in."
+    #    redirect_to login_url
+    #  end
+    #end    
   
     # Confirms the correct user.
     def correct_user

@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
+  
+  default_scope -> { order(last_access_at: :desc, id: :asc) }
+  
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email
