@@ -7,13 +7,15 @@ class UsersController < ApplicationController
   def index
     #@users = User.all
     #@users = User.paginate(page: params[:page])
-    @users = User.order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
+    #@users = User.order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
+    @users = User.where(activated: true).order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
     #user_sorted = User.sort_by(&:last_access_at)
     #@users = user_sorted.paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated?
     #debugger
   end
 
