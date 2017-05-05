@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
     #@users = User.all
     #@users = User.paginate(page: params[:page])
-    @users = User.order(last_access_at: :desc).paginate(page: params[:page])
+    @users = User.order(last_access_at: :desc, id: :asc).paginate(page: params[:page])
     #user_sorted = User.sort_by(&:last_access_at)
     #@users = user_sorted.paginate(page: params[:page])
   end
